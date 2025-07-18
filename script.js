@@ -39,7 +39,6 @@ async function fetchWeather(city) {
 
     const iconCode = data.weather[0].icon;
 
-    // Güneş SVG kodu
     const sunSVG = `
       <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="orange" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
         <circle cx="12" cy="12" r="5" />
@@ -54,10 +53,8 @@ async function fetchWeather(city) {
       </svg>
     `;
 
-    // Diğer ikon URL'si
     const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-    // Güneş için SVG, diğerleri için OpenWeatherMap ikon URL'si
     const iconHtml = (iconCode === "01d" || iconCode === "01n") ? sunSVG : `<img src="${iconUrl}" alt="hava durumu" />`;
 
     weatherResult.innerHTML = `
