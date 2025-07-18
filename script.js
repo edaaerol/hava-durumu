@@ -1,4 +1,4 @@
-const apiKey = "fdcd9b4cc83d7f22472d820d7a703ec9"; // API key
+const apiKey = "fdcd9b4cc83d7f22472d820d7a703ec9";
 
 const citySelect = document.getElementById("citySelect");
 const cityInput = document.getElementById("cityInput");
@@ -12,7 +12,6 @@ getWeatherBtn.addEventListener("click", () => {
 
   let city = cityInput.value.trim();
 
-  // Eğer manuel giriş boşsa, dropdown seçeneğini kullan
   if (city === "") {
     city = citySelect.value;
   }
@@ -38,15 +37,33 @@ async function fetchWeather(city) {
 
     weatherResult.style.display = "block";
 
-    // Burada OpenWeatherMap'in icon kodlarını kullanıyoruz
-    // icon örn: 01d (güneş), 02d (hafif bulut), 03d/04d (bulut), vb.
     const iconCode = data.weather[0].icon;
+
+    // Güneş SVG kodu
+    const sunSVG = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="orange" stroke="orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+        <circle cx="12" cy="12" r="5" />
+        <line x1="12" y1="1" x2="12" y2="3" />
+        <line x1="12" y1="21" x2="12" y2="23" />
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+        <line x1="1" y1="12" x2="3" y2="12" />
+        <line x1="21" y1="12" x2="23" y2="12" />
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+      </svg>
+    `;
+
+    // Diğer ikon URL'si
     const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+    // Güneş için SVG, diğerleri için OpenWeatherMap ikon URL'si
+    const iconHtml = (iconCode === "01d" || iconCode === "01n") ? sunSVG : `<img src="${iconUrl}" alt="hava durumu" />`;
 
     weatherResult.innerHTML = `
       <h2>${data.name}</h2>
       <p style="text-transform: capitalize;">${data.weather[0].description}</p>
-      <img src="${iconUrl}" alt="hava durumu" />
+      ${iconHtml}
       <p><strong>Sıcaklık:</strong> ${data.main.temp} °C</p>
       <p><strong>Nem:</strong> %${data.main.humidity}</p>
       <p><strong>Rüzgar:</strong> ${data.wind.speed} m/s</p>
