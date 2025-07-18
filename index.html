@@ -87,59 +87,7 @@
     <div id="errorMsg" class="error"></div>
   </div>
 
-  <script>
-    const apiKey = "fdcd9b4cc83d7f22472d820d7a703ec9"; 
-
-    const citySelect = document.getElementById("citySelect");
-    const cityInput = document.getElementById("cityInput");
-    const weatherResult = document.getElementById("weatherResult");
-    const errorMsg = document.getElementById("errorMsg");
-    const getWeatherBtn = document.getElementById("getWeatherBtn");
-
-    getWeatherBtn.addEventListener("click", () => {
-      errorMsg.textContent = "";
-      weatherResult.style.display = "none";
-      let city = cityInput.value.trim();
-
-      // Eğer manuel giriş boşsa, dropdown seçeneğini kullan
-      if (city === "") {
-        city = citySelect.value;
-      }
-
-      if (city === "") {
-        errorMsg.textContent = "Lütfen bir şehir seçin veya yazın!";
-        return;
-      }
-
-      fetchWeather(city);
-    });
-
-    async function fetchWeather(city) {
-      try {
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric&lang=tr`;
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error("Şehir bulunamadı veya API hatası.");
-        }
-
-        const data = await response.json();
-
-        weatherResult.style.display = "block";
-        weatherResult.innerHTML = `
-          <h2>${data.name}</h2>
-          <p>${data.weather[0].description}</p>
-          <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="hava durumu" />
-          <p><strong>Sıcaklık:</strong> ${data.main.temp} °C</p>
-          <p><strong>Nem:</strong> %${data.main.humidity}</p>
-          <p><strong>Rüzgar:</strong> ${data.wind.speed} m/s</p>
-        `;
-
-      } catch (error) {
-        errorMsg.textContent = error.message;
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
