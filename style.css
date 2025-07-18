@@ -100,14 +100,14 @@ button:hover {
   background-color: #666;
 }
 
-/* Footer markası */
 .footer-brand {
   text-align: center;
   font-size: 14px;
-  color: #fff;
+  color: #fff !important;  /* Önemli! */
   padding: 20px 0;
   border-top: 1px solid #eee;
   margin-top: 100px;
   margin-bottom: 30px;
   opacity: 0.8;
 }
+
