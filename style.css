@@ -70,10 +70,11 @@ button:hover {
 .footer-brand {
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
-  font-size: 16px;
-  color: #888;
+  font-size: 14px;
+  color: #aaa;
   padding: 20px 0;
   border-top: 1px solid #eee;
-  margin-top: 40px;
+  margin-top: 100px;  /* Eskisi 50px'ti, şimdi 100px */
+  margin-bottom: 30px; /* Aşağıya daha da boşluk bırakır */
   opacity: 0.8;
 }
